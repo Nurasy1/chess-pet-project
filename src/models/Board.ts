@@ -31,7 +31,7 @@ export class Board {
         return newBoard;
     }
 
-    public highlightCells(selected: Cell | null) {
+    public highlightCells(selectedCell: Cell | null) {
         for (let i = 0; i < this.cells.length; i++) {
             const row = this.cells[i];
             for (let j = 0; j < row.length; j++) {
