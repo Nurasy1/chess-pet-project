@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Board} from "../models/Board";
 import CellComponent from "./CellComponent";
 import {Cell} from "../models/Cell";
@@ -15,7 +15,20 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
         if (cell.figure) {
             setSelectedCell(cell);
         }
+    }
 
+    useEffect(() => {
+        highlightsCells()
+    }, [selectedCell])
+
+    function highlightsCells() {
+        board.highlightsCells(selectedCell)
+        updateBoard()
+    }
+
+    function updateBoard() {
+        const newBoard = board.getCopyBoard()
+        setBoard(newBoard)
     }
 
     return (
@@ -24,7 +37,7 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
                 <React.Fragment key={index}>
                     {row.map(cell =>
                         <CellComponent
-                            click = {click}
+                            click={click}
                             cell={cell}
                             key={cell.id}
                             selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
