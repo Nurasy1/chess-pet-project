@@ -3,6 +3,7 @@ import {Board} from "../models/Board";
 import CellComponent from "./CellComponent";
 import {Cell} from "../models/Cell";
 
+
 interface BoardProps {
     board: Board;
     setBoard: (board: Board) => void;
@@ -12,8 +13,13 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard}) => {
     const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
 
     function click(cell: Cell) {
-        if (cell.figure) {
-            setSelectedCell(cell);
+        if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)){
+            selectedCell.moveFigure(cell);
+            setSelectedCell(null);
+            updateBoard()
+        } else {
+            setSelectedCell(cell)
+
         }
     }
 
