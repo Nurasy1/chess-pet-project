@@ -9,6 +9,7 @@ import LostFigures from "./components/LostFigures";
 import Timer from "./components/Timer";
 
 const App = () => {
+
     const [board, setBoard] = useState(new Board())
     const [whitePlayer, setWhitePlayer] = useState(new Player(Colors.WHITE))
     const [blackPlayer, setBlackPlayer] = useState(new Player(Colors.BLACK))
